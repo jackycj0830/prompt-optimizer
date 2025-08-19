@@ -32,7 +32,7 @@ dev = [
   "flake8>=7.0",
 ]
 
-[project.scripts]
+[project.gui-scripts]
 prompt-optimizer = "po_app.main:main"
 
 [tool.black]
