@@ -317,6 +317,26 @@ pnpm dev:fresh        # 完整重置并重新启动开发环境
 - [Vercel部署指南](docs/user/deployment/vercel.md) - Vercel部署详细说明
 
 
+## 📦 Package Management Migration (Poetry → PDM)
+
+We migrated the Python desktop refactor from Poetry to PDM to improve Windows developer experience and adopt PEP 621-native configuration.
+
+Why the change?
+- Some contributors hit PATH/installation issues on Windows with Poetry
+- PDM is easy to install via pipx and uses PEP 621 in pyproject.toml
+
+Quick setup (Windows/macOS/Linux):
+- Install PDM: `pipx install pdm`
+- Install deps: `pdm install`
+- Run tests: `pdm run pytest`
+- Start app: `pdm run python po_app/main.py` (or `pdm run prompt-optimizer`)
+- Build EXE (Windows): `pdm run python build.py`
+
+Details: see the developer guide “Python local dev & build” and the migration notes.
+- Guide: docs/developer/python-local-dev-build-guide.md
+- Migration (optional): docs/developer/poetry-to-pdm-migration.md
+
+
 ## Star History
 
 <a href="https://star-history.com/#linshenkx/prompt-optimizer&Date">

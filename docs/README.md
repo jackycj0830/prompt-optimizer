@@ -59,6 +59,7 @@ Working notes and WIP design
 ### Specialized Guides
 - [LLM Parameters Guide](./developer/llm-params-guide.md)
 - [Python local dev & build guide](./developer/python-local-dev-build-guide.md)
+- Poetry → PDM migration notes (optional): [poetry-to-pdm-migration.md](./developer/poetry-to-pdm-migration.md)
 - AI Dev Workflow (if applicable)
 
 ---
