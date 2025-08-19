@@ -18,31 +18,26 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install Poetry
-        uses: abatilo/actions-poetry@v2
-        with:
-          poetry-version: '1.8.3'
-
-      - name: Configure Poetry
+      - name: Install PDM
         run: |
-          poetry config virtualenvs.create true
-          poetry config virtualenvs.in-project true
+          python -m pip install -U pip pipx
+          pipx install pdm
 
       - name: Install dependencies
         run: |
-          poetry install --no-interaction --no-ansi
+          pdm install
 
       - name: Lint (black)
         run: |
-          poetry run black --check .
+          pdm run black --check .
 
       - name: Lint (flake8)
         run: |
-          poetry run flake8 .
+          pdm run flake8 .
 
       - name: Run tests (pytest)
         run: |
-          poetry run pytest
+          pdm run pytest
 
       - name: Measure build time start
         id: start
@@ -51,7 +46,7 @@ jobs:
 
       - name: Build EXE with PyInstaller (with size optimizations)
         run: |
-          poetry run python build.py
+          pdm run python build.py
 
       - name: Measure build time end and compute duration
         id: end

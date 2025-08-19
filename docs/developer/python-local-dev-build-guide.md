@@ -2,35 +2,35 @@
 
 ## 前置要求
 - Python 3.12 或更高版本
-- Poetry 包管理工具（如未安裝，請先執行 `pip install poetry`）
+- PDM 包管理工具（如未安裝，請先執行 `pipx install pdm`）
 - Windows 環境（用於 EXE 打包）
 
 ## 開發環境設置
 1. 安裝項目依賴：
    ```bash
-   poetry install
+   pdm install
    ```
    這將創建虛擬環境並安裝 pyproject.toml 中定義的所有運行時和開發依賴。
 
 2. 運行測試套件：
    ```bash
-   poetry run pytest
+   pdm run pytest
    ```
    執行完整的測試套件，包括單元測試、集成測試和 GUI 測試，並生成覆蓋率報告。
 
 3. 啟動應用程序（開發模式）：
    ```bash
-   poetry run python po_app/main.py
+   pdm run python po_app/main.py
    ```
    或使用配置的腳本：
    ```bash
-   poetry run prompt-optimizer
+   pdm run prompt-optimizer
    ```
 
 ## 構建可執行文件
 1. 構建單文件 EXE（默認）：
    ```bash
-   poetry run python build.py
+   pdm run python build.py
    ```
    產出：`dist/PromptOptimizer.exe`（獨立可執行文件，包含所有依賴）
 
