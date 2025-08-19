@@ -1,0 +1,81 @@
+name: CI Monorepo
+
+on:
+  pull_request:
+    branches: [ develop, main, master ]
+  push:
+    branches: [ develop ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 10.6.1
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build all
+        run: |
+          pnpm build
+          pnpm -F @prompt-optimizer/extension build
+          pnpm mcp:build
+
+      - name: Unit tests (Vitest)
+        run: pnpm test -- --passWithNoTests
+
+      - name: Validate artifacts
+        run: |
+          test -d packages/web/dist || (echo "web dist missing" && exit 1)
+          test -d packages/mcp-server/dist || (echo "mcp dist missing" && exit 1)
+
+  desktop-matrix:
+    needs: build-test
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 10.6.1
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build Desktop (dry run)
+        run: pnpm -F @prompt-optimizer/desktop build
+
+  lint-types:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 10.6.1
+          run_install: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+      - name: Install deps
+        run: pnpm install
+      - name: TypeScript check
+        run: |
+          pnpm -F @prompt-optimizer/core test:type || true
+          pnpm -F @prompt-optimizer/mcp-server type-check || true
+

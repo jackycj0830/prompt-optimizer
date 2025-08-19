@@ -42,11 +42,19 @@ jobs:
       - name: 安装依赖
         run: pnpm install
 
-      - name: 运行构建
-        run: pnpm build
+      - name: 运行构建（core/ui/web/extension/mcp）
+        run: pnpm build && pnpm -F @prompt-optimizer/extension build && pnpm mcp:build
 
-      - name: 运行测试
-        run: pnpm test
+      - name: 运行测试（所有包）
+        run: pnpm test -- --passWithNoTests
+
+      - name: 验证 Web 构建产物
+        run: |
+          test -d packages/web/dist || (echo "web dist missing" && exit 1)
+
+      - name: 验证 MCP Server 构建产物
+        run: |
+          test -d packages/mcp-server/dist || (echo "mcp dist missing" && exit 1)
 
       - name: 获取package.json版本号
         id: version

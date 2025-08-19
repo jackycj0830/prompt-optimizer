@@ -305,12 +305,36 @@ pnpm dev:fresh        # 完整重置并重新启动开发环境
 ## 📖 相关文档
 
 - [文档索引](docs/README.md) - 所有文档的索引
+- 需求/設計/任務（中文 / English）
+  - [需求文檔 requirements.md](docs/requirements.md) / [Requirements](docs/requirements_en.md)
+  - [設計文檔 design.md](docs/design.md) / [Design](docs/design_en.md)
+  - [任務分解 task.md](docs/task.md) / [Tasks](docs/task_en.md)
 - [技术开发指南](docs/developer/technical-development-guide.md) - 技术栈和开发规范
 - [LLM参数配置指南](docs/developer/llm-params-guide.md) - 高级LLM参数配置详细说明
 - [项目结构](docs/developer/project-structure.md) - 详细的项目结构说明
 - [项目状态](docs/project/project-status.md) - 当前进度和计划
 - [产品需求](docs/project/prd.md) - 产品需求文档
 - [Vercel部署指南](docs/user/deployment/vercel.md) - Vercel部署详细说明
+
+
+## 📦 Package Management Migration (Poetry → PDM)
+
+We migrated the Python desktop refactor from Poetry to PDM to improve Windows developer experience and adopt PEP 621-native configuration.
+
+Why the change?
+- Some contributors hit PATH/installation issues on Windows with Poetry
+- PDM is easy to install via pipx and uses PEP 621 in pyproject.toml
+
+Quick setup (Windows/macOS/Linux):
+- Install PDM: `pipx install pdm`
+- Install deps: `pdm install`
+- Run tests: `pdm run pytest`
+- Start app: `pdm run python po_app/main.py` (or `pdm run prompt-optimizer`)
+- Build EXE (Windows): `pdm run python build.py`
+
+Details: see the developer guide “Python local dev & build” and the migration notes.
+- Guide: docs/developer/python-local-dev-build-guide.md
+- Migration (optional): docs/developer/poetry-to-pdm-migration.md
 
 
 ## Star History
