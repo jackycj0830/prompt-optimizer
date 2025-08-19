@@ -26,6 +26,12 @@ def main() -> None:
         "--exclude-module", "pytest_qt",
         "--exclude-module", "black",
         "--exclude-module", "flake8",
+        # ensure PySide6/Qt binaries, data and plugins (incl. OpenSSL) are bundled
+        "--collect-all", "PySide6",
+        "--collect-submodules", "PySide6",
+        "--collect-data", "PySide6",
+        "--collect-data", "shiboken6",
+        "--collect-binaries", "PySide6",
         # optional UPX (if installed in PATH)
         # "--upx-dir", "C:/Tools/upx",
         "po_app/main.py",
