@@ -1,0 +1,43 @@
+name: Deployment Task
+description: Create a deployment task (Vercel/Docker/Desktop/Extension)
+title: "deploy: [vercel|docker|desktop|extension] <short summary>"
+labels: [deploy]
+body:
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - vercel
+        - docker
+        - desktop
+        - extension
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Reference docs/design.md deployment architecture and docs/task.md deployment plan
+      placeholder: vercel.json rewrite / middleware; Dockerfile multi-stage; electron-builder targets
+    validations:
+      required: true
+
+  - type: textarea
+    id: checks
+    attributes:
+      label: Automated Checks
+      description: List CI checks to add/update (build/test/healthchecks)
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Must satisfy docs/requirements.md constraints
+    validations:
+      required: true
+

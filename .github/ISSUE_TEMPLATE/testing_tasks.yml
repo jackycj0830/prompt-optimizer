@@ -1,0 +1,42 @@
+name: Testing Task
+description: Create a testing task (unit/integration/E2E)
+title: "test: [unit|integration|e2e] <short summary>"
+labels: [test]
+body:
+  - type: dropdown
+    id: level
+    attributes:
+      label: Level
+      options:
+        - unit (Vitest)
+        - integration (components/services)
+        - e2e
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Map to docs/task.md testing plan and affected packages
+      placeholder: packages/core services/llm; packages/ui components; packages/web streaming path
+    validations:
+      required: true
+
+  - type: textarea
+    id: cases
+    attributes:
+      label: Key Cases
+      description: List edge cases (streaming, timeouts, large text, errors)
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Clear pass/fail conditions; link to requirements_en.md §Acceptance
+    validations:
+      required: true
+
