@@ -16,6 +16,7 @@ def main() -> None:
         "--clean",
         "--noconfirm",
         "--onefile",
+        "--windowed",  # Hide console window; use Windows GUI subsystem
         "--name", "PromptOptimizer",
         "--icon", "po_app/assets/icon.ico",
         "--add-data", "po_app/assets;assets",
