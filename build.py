@@ -16,12 +16,17 @@ def main() -> None:
         "--clean",
         "--noconfirm",
         "--onefile",
-        "--name",
-        "PromptOptimizer",
-        "--icon",
-        "po_app/assets/icon.ico",
-        "--add-data",
-        "po_app/assets;assets",
+        "--name", "PromptOptimizer",
+        "--icon", "po_app/assets/icon.ico",
+        "--add-data", "po_app/assets;assets",
+        # size optimizations:
+        "--exclude-module", "pytest",
+        "--exclude-module", "pytest_cov",
+        "--exclude-module", "pytest_qt",
+        "--exclude-module", "black",
+        "--exclude-module", "flake8",
+        # optional UPX (if installed in PATH)
+        # "--upx-dir", "C:/Tools/upx",
         "po_app/main.py",
     ]
     run(cmd)

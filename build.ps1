@@ -1,5 +1,6 @@
 param(
-  [switch]$OneDir
+  [switch]$OneDir,
+  [switch]$UseUPX
 )
 
 python -m pip install -U pip
@@ -16,8 +17,19 @@ $common = @(
   "--noconfirm",
   "--name", "PromptOptimizer",
   "--icon", "po_app/assets/icon.ico",
-  "--add-data", "po_app/assets;assets"
+  "--add-data", "po_app/assets;assets",
+  "--exclude-module", "pytest",
+  "--exclude-module", "pytest_cov",
+  "--exclude-module", "pytest_qt",
+  "--exclude-module", "black",
+  "--exclude-module", "flake8"
 )
+
+if ($UseUPX) {
+  # If UPX is installed in PATH, PyInstaller will compress binaries.
+  # Optionally specify --upx-dir here if not in PATH
+  Write-Host "UPX compression is enabled" -ForegroundColor Green
+}
 
 if ($OneDir) {
   pyinstaller @common "po_app/main.py"

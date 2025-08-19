@@ -44,13 +44,43 @@ jobs:
         run: |
           poetry run pytest
 
-      - name: Build EXE with PyInstaller
+      - name: Measure build time start
+        id: start
+        run: echo "ts=$(Get-Date -UFormat %s)" >> $env:GITHUB_OUTPUT
+        shell: pwsh
+
+      - name: Build EXE with PyInstaller (with size optimizations)
         run: |
           poetry run python build.py
+
+      - name: Measure build time end and compute duration
+        id: end
+        run: |
+          $start = '${{ steps.start.outputs.ts }}'
+          $end = Get-Date -UFormat %s
+          $duration = [int]$end - [int]$start
+          echo "BuildDurationSeconds=$duration" | Out-File -FilePath build_metrics.txt -Encoding utf8
+        shell: pwsh
+
+      - name: Check EXE size
+        run: |
+          $exe = Get-ChildItem dist -Filter *.exe -Recurse | Select-Object -First 1
+          if ($null -eq $exe) { throw "No EXE found in dist" }
+          echo "EXE: $($exe.FullName) SizeBytes=$($exe.Length)" | Out-File -FilePath build_metrics.txt -Append -Encoding utf8
+        shell: pwsh
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: prompt-optimizer-exe
-          path: dist/**
+          path: |
+            dist/**
+            build_metrics.txt
+
+      - name: Optional: UPX compress (sanity check)
+        if: ${{ false }} # toggle to true to enable when UPX available
+        run: |
+          upx -9 dist\PromptOptimizer.exe
+          dir dist
+        shell: pwsh
 
