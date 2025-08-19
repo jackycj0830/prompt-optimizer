@@ -69,14 +69,13 @@ def main() -> None:
         "--exclude-module", "pytest_qt",
         "--exclude-module", "black",
         "--exclude-module", "flake8",
-        # robust Qt collection
+        # robust Qt collection（盡可能交給 PyInstaller hooks 處理）
         "--collect-all", "PySide6",
         "--collect-submodules", "PySide6",
         "--collect-data", "PySide6",
         "--collect-data", "shiboken6",
         "--collect-binaries", "PySide6",
-        # help PyInstaller hook pick the necessary Qt plugins as well
-        "--collect-qt-plugins=platforms,styles,imageformats,tls",
+        # 注意：部分 PyInstaller 版本沒有 --collect-qt-plugins 參數，改為下方自動偵測+--add-data
     ]
 
     # Add mode flag at the end (PyInstaller requires one of them)
