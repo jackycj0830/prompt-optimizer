@@ -58,6 +58,7 @@ Working notes and WIP design
 
 ### Specialized Guides
 - [LLM Parameters Guide](./developer/llm-params-guide.md)
+- [Python local dev & build guide](./developer/python-local-dev-build-guide.md)
 - AI Dev Workflow (if applicable)
 
 ---
