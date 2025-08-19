@@ -30,8 +30,12 @@ class PromptTab(QWidget):
         layout = QVBoxLayout(self)
 
         controls = QHBoxLayout()
+        self.provider_select = QComboBox(self)
+        self.provider_select.addItems(["openai", "gemini", "compatible"])
         self.model_select = QComboBox(self)
         self.template_select = QComboBox(self)
+        controls.addWidget(QLabel("Provider:"))
+        controls.addWidget(self.provider_select)
         controls.addWidget(QLabel("Model:"))
         controls.addWidget(self.model_select)
         controls.addWidget(QLabel("Template:"))
@@ -54,13 +58,38 @@ class PromptTab(QWidget):
         layout.addLayout(actions)
 
         self.btn_optimize.clicked.connect(self._on_optimize)
+        self._load_initial_data()
+
+    def _load_initial_data(self):
+        # load provider/model/template lists
+        prefs = self.services.get("prefs")
+        provider = prefs.get("provider", "openai") if prefs else "openai"
+        idx = self.provider_select.findText(provider)
+        if idx >= 0:
+            self.provider_select.setCurrentIndex(idx)
+
+        models = self.services.get("models").list() if self.services.get("models") else []
+        self.model_select.clear()
+        for m in models:
+            self.model_select.addItem(m.name)
+
+        templates = self.services.get("templates").list() if self.services.get("templates") else []
+        self.template_select.clear()
+        for t in templates:
+            self.template_select.addItem(t.id)
 
     def _on_optimize(self):
-        provider = "openai"  # TODO: from selection
+        provider = self.provider_select.currentText() or "openai"
         model = self.model_select.currentText() or "gpt-4o-mini"
         text = self.input_text.toPlainText()
-        # TODO: render template with TemplateManager
-        prompt = text
+
+        tpl_id = self.template_select.currentText()
+        tpl_mgr = self.services.get("templates")
+        if tpl_mgr and tpl_id:
+            tpl = tpl_mgr.get(tpl_id)
+            prompt = tpl.render({"input": text})
+        else:
+            prompt = text
 
         self.output_text.clear()
         self._thread = QThread(self)
@@ -68,7 +97,16 @@ class PromptTab(QWidget):
         self._worker.moveToThread(self._thread)
         self._thread.started.connect(self._worker.run)
         self._worker.progress.connect(self.output_text.insertPlainText)
-        self._worker.finished.connect(self._thread.quit)
+        self._worker.finished.connect(self._on_stream_finished)
         self._worker.error.connect(lambda m: self.output_text.append(f"\n[Error] {m}"))
         self._thread.start()
+
+    def _on_stream_finished(self):
+        # write history
+        history = self.services.get("history")
+        tpl_id = self.template_select.currentText()
+        model = self.model_select.currentText()
+        if history:
+            history.append("optimize", self.input_text.toPlainText(), self.output_text.toPlainText(), model, tpl_id)
+        self.output_text.append("\n[Done]")
 

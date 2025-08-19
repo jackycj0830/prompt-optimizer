@@ -47,7 +47,13 @@ SCHEMA = [
 
 class SQLiteProvider:
     def __init__(self, db_path: str) -> None:
-        self.db_path = db_path
+        # ensure directory exists
+        import os
+        from pathlib import Path
+        p = Path(db_path)
+        if p.parent and not p.parent.exists():
+            p.parent.mkdir(parents=True, exist_ok=True)
+        self.db_path = str(p)
         self._init_schema()
 
     @contextmanager
