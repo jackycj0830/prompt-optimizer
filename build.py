@@ -1,4 +1,5 @@
 import os
+import sys
 import subprocess
 from pathlib import Path
 
@@ -55,13 +56,16 @@ def main() -> None:
     mode = os.environ.get("PO_BUILD_MODE", "onefile").lower()
     onefile = mode != "onedir"
 
+    icon_path = Path(__file__).parent / "po_app" / "assets" / "icon.ico"
+    icon_arg = ["--icon", str(icon_path)] if icon_path.exists() else []
+
     cmd = [
-        "pyinstaller",
+        sys.executable, "-m", "PyInstaller",
         "--clean",
         "--noconfirm",
         "--windowed",  # Hide console window; use Windows GUI subsystem
         "--name", "PromptOptimizer",
-        "--icon", "po_app/assets/icon.ico",
+        *icon_arg,
         "--add-data", f"po_app/assets{os.pathsep}assets",
         # size optimizations:
         "--exclude-module", "pytest",
