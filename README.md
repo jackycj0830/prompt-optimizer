@@ -305,6 +305,10 @@ pnpm dev:fresh        # 完整重置并重新启动开发环境
 ## 📖 相关文档
 
 - [文档索引](docs/README.md) - 所有文档的索引
+- 需求/設計/任務（中文 / English）
+  - [需求文檔 requirements.md](docs/requirements.md) / [Requirements](docs/requirements_en.md)
+  - [設計文檔 design.md](docs/design.md) / [Design](docs/design_en.md)
+  - [任務分解 task.md](docs/task.md) / [Tasks](docs/task_en.md)
 - [技术开发指南](docs/developer/technical-development-guide.md) - 技术栈和开发规范
 - [LLM参数配置指南](docs/developer/llm-params-guide.md) - 高级LLM参数配置详细说明
 - [项目结构](docs/developer/project-structure.md) - 详细的项目结构说明

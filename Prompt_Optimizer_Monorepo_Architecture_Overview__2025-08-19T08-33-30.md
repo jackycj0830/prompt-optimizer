@@ -1,0 +1,2 @@
+[ ] NAME:Current Task List DESCRIPTION:Root task for conversation 52d8d1f0-8d65-494e-9f5c-9cecc13693a5
+-[x] NAME:Investigate/Triage/Understand the project structure and architecture DESCRIPTION:List and inspect key files and directories to map the monorepo/workspace layout, packages, configs, entry points, and dependencies.
