@@ -54,6 +54,7 @@ Working notes and WIP design
 - Requirements: [requirements.md](./requirements.md) / [requirements_en.md](./requirements_en.md)
 - Design: [design.md](./design.md) / [design_en.md](./design_en.md)
 - Tasks: [task.md](./task.md) / [task_en.md](./task_en.md)
+- Python Refactor: [requirements_python.md](./requirements_python.md) / [requirements_python_en.md](./requirements_python_en.md), [design_python.md](./design_python.md) / [design_python_en.md](./design_python_en.md), [task_python.md](./task_python.md) / [task_python_en.md](./task_python_en.md)
 
 ### Specialized Guides
 - [LLM Parameters Guide](./developer/llm-params-guide.md)
@@ -132,6 +133,10 @@ Below is the original Chinese index. For English readers, use the navigation abo
   - [需求文檔 requirements.md](./requirements.md) / [Requirements](./requirements_en.md)
   - [設計文檔 design.md](./design.md) / [Design](./design_en.md)
   - [任務分解 task.md](./task.md) / [Tasks](./task_en.md)
+  - Python 重構（中文 / English）：
+    - [requirements_python.md](./requirements_python.md) / [requirements_python_en.md](./requirements_python_en.md)
+    - [design_python.md](./design_python.md) / [design_python_en.md](./design_python_en.md)
+    - [task_python.md](./task_python.md) / [task_python_en.md](./task_python_en.md)
 - [技术开发指南](./developer/technical-development-guide.md) - 完整的技术栈和开发规范
 - [项目结构](./developer/project-structure.md) - 文件和目录组织说明
 - [产品需求文档](./project/prd.md) - 产品功能需求和规格
