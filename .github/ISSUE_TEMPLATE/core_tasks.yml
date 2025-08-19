@@ -1,0 +1,53 @@
+name: Core Development Task
+description: Create a core module task (LLM/Model/Template/Prompt/History/Preference/Data)
+title: "core: [P0|P1|P2] <short summary>"
+labels: [core]
+body:
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - P0 (Must)
+        - P1 (Should)
+        - P2 (Could)
+      default: 0
+    validations:
+      required: true
+
+  - type: input
+    id: module
+    attributes:
+      label: Module
+      description: e.g., LLMService, ModelManager, TemplateManager, PromptService, HistoryManager, PreferenceService, DataManager
+      placeholder: LLMService
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Describe what to build/change (reference design.md sections)
+      placeholder: Reference sections in docs/design.md
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Must align with docs/requirements.md (performance/security/compatibility)
+      placeholder: Bullet points mapping to Requirements
+    validations:
+      required: true
+
+  - type: textarea
+    id: tests
+    attributes:
+      label: Tests
+      description: Unit/Integration per docs/task.md
+      placeholder: Vitest unit tests, integration (mock providers), streaming handlers
+    validations:
+      required: true
+

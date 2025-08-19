@@ -1,3 +1,69 @@
+# Documentation Index (English)
+
+Welcome to the Prompt Optimizer documentation. This index mirrors the Chinese structure and provides bilingual navigation.
+
+- Language: English | [中文](#项目文档索引)
+
+## 📚 Categories
+
+### 👥 [User Docs](./user/)
+Guides for end-users: usage, deployment, FAQs
+- Desktop user guide
+- Web guide
+- Deployment (Vercel, Docker)
+- FAQs
+
+### 👨‍💻 [Developer Docs](./developer/)
+Technical guides, API reference, troubleshooting
+- Technical development guide
+- Project structure
+- API / architecture notes
+- Troubleshooting
+
+### 📋 [Project Docs](./project/)
+Requirements, status tracking, planning
+- Product requirements
+- Project status & roadmap
+- Versioning strategy
+
+### 📦 [Archives](./archives/)
+Feature-specific development records
+
+### 🛠️ [Workspace](./workspace/)
+Working notes and WIP design
+
+## 🚀 Quick Navigation
+
+### I’m a User
+- How to use → [User Docs](./user/)
+- Deploy the app → [Deployment](./user/deployment/)
+- Troubleshoot issues → [Troubleshooting](./developer/troubleshooting/)
+
+### I’m a Developer
+- Contribute → [Developer Docs](./developer/)
+- Understand architecture → [Technical Guide](./developer/technical-development-guide.md)
+- See history → [Archives](./archives/)
+
+### I’m a PM
+- Project status → [Project Docs](./project/)
+- Product planning → [PRD](./project/prd.md)
+
+## 📖 Key Documents
+
+### Core Planning (中文 / English)
+- Requirements: [requirements.md](./requirements.md) / [requirements_en.md](./requirements_en.md)
+- Design: [design.md](./design.md) / [design_en.md](./design_en.md)
+- Tasks: [task.md](./task.md) / [task_en.md](./task_en.md)
+
+### Specialized Guides
+- [LLM Parameters Guide](./developer/llm-params-guide.md)
+- AI Dev Workflow (if applicable)
+
+---
+
+Below is the original Chinese index. For English readers, use the navigation above.
+
+
 # 项目文档索引
 
 欢迎来到Prompt Optimizer项目文档！本文档采用分级分类的组织方式，便于不同角色的用户快速找到所需信息。
@@ -62,6 +128,10 @@
 
 ### 核心文档
 - [项目总体介绍](../README.md) - 项目概述和快速开始
+- 核心規劃（中文 / English）
+  - [需求文檔 requirements.md](./requirements.md) / [Requirements](./requirements_en.md)
+  - [設計文檔 design.md](./design.md) / [Design](./design_en.md)
+  - [任務分解 task.md](./task.md) / [Tasks](./task_en.md)
 - [技术开发指南](./developer/technical-development-guide.md) - 完整的技术栈和开发规范
 - [项目结构](./developer/project-structure.md) - 文件和目录组织说明
 - [产品需求文档](./project/prd.md) - 产品功能需求和规格

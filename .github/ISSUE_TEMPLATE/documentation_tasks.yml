@@ -1,0 +1,27 @@
+name: Documentation Task
+description: Create a documentation task
+title: "docs: <short summary>"
+labels: [docs]
+body:
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What to write/update; link to docs/README.md index
+    validations:
+      required: true
+
+  - type: textarea
+    id: crosslinks
+    attributes:
+      label: Cross-linking
+      description: Ensure links between requirements/design/task and relevant guides
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Align with docs/requirements.md §Acceptance and index update
+    validations:
+      required: true
+
